@@ -1,0 +1,11 @@
+html
+    head
+        title Home Health Check
+
+    body
+        h1 Home Health Check
+        h2 All users
+        ul
+            each val in users
+                li
+                    a(href="/?user="+val.email)=val.email

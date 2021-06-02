@@ -1,0 +1,29 @@
+html
+    head
+        title Home Health Check
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js')
+
+    body
+        h1 Dashboard for !{email}
+
+        h2 Heart Rate Data 
+        | <canvas id="heartRate" style="width:100%;max-width:600px"></canvas>
+
+        script.
+            var xData = !{JSON.stringify(dates)};
+            var yData = !{JSON.stringify(heart_rates)};
+            new Chart("heartRate", {
+              type: "line",
+              data: {
+                labels: xData,
+                datasets: [{data: yData, borderColor: "red", fill: false}]
+              },
+              options: {legend: {display: false}}
+            });
+
+        h2 Recent images
+        ul(style="list-style: none;")
+            each val in health_data
+                li(style="display: inline-block; margin-left: 10px;")
+                    img(src='/uploads/'+val.image, alt='some image' style='width:330px;')
+                    p(style="text-align:center;")=val.created 
